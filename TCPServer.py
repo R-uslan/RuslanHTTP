@@ -19,7 +19,7 @@ class TCPServer:
 
         while self.running:
             conn, addr = self.s.accept()
-            print(f"Connection from {addr}:{conn}")
+            print(f"Connection from {addr}")
             self.handle_connection(conn, addr)
             conn.close()
 
@@ -27,6 +27,7 @@ class TCPServer:
         """
         Gracefully shutdown server.
         """
+        print("Stopping server...")
         self.running = False
         if self.socket:
             self.socket.close()
@@ -35,6 +36,7 @@ class TCPServer:
         """
         Handle the TCP connection. To be overridden by inheritor.
         """
+        print(f"Handled connection from {addr}")
         conn.recv(self.buffer_size)
         conn.sendall(b"Connection received")
 
