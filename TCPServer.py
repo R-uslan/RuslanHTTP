@@ -18,10 +18,14 @@ class TCPServer:
         self.s = socket.create_server(self.address, reuse_port=True)
 
         while self.running:
-            conn, addr = self.s.accept()
-            print(f"Connection from {addr}")
-            self.handle_connection(conn, addr)
-            conn.close()
+            try:
+                conn, addr = self.s.accept()
+                print(f"Connection from {addr}")
+                self.handle_connection(conn, addr)
+                conn.close()
+            except KeyboardInterrupt:
+                print("Keyboard interrupt detected.")
+                self.stop()
 
     def stop(self):
         """
