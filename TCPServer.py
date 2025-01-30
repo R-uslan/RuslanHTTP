@@ -40,9 +40,9 @@ class TCPServer:
         """
         Handle the TCP connection. To be overridden by inheritor.
         """
-        print(f"Handled connection from {addr}")
         conn.recv(self.buffer_size)
         conn.sendall(b"Connection received")
+        print(f"Handled connection from {addr}")
 
 
 if __name__ == "__main__":
