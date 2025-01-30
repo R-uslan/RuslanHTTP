@@ -3,10 +3,10 @@ import socket
 
 class TCPServer:
     def __init__(self, host: str = "127.0.0.1", port: int = 8080):
-        self.address = (host, port)
-        self.running = False
+        self.address: tuple = (host, port)
+        self.running: bool = False
         self.socket: socket.socket = None
-        self.buffer_size = 4096  # Used for recv
+        self.buffer_size: int = 4096  # Used for recv
 
     def start(self):
         """
@@ -20,7 +20,7 @@ class TCPServer:
         while self.running:
             try:
                 conn, addr = self.s.accept()
-                print(f"Connection from {addr}")
+                print(f"Connection from {type(addr)}")
                 self.handle_connection(conn, addr)
                 conn.close()
             except KeyboardInterrupt:
@@ -36,7 +36,7 @@ class TCPServer:
         if self.socket:
             self.socket.close()
 
-    def handle_connection(self, conn, addr):
+    def handle_connection(self, conn: socket.socket, addr: tuple):
         """
         Handle the TCP connection. To be overridden by inheritor.
         """
