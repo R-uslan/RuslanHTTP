@@ -1,5 +1,6 @@
 import socket
 
+from HTTPRequest import HTTPRequest
 from TCPServer import TCPServer
 
 
@@ -10,11 +11,16 @@ class HTTPServer(TCPServer):
         """
         raw_request = self.get_raw_request(conn)
 
-        conn.sendall(raw_request)
+        request = HTTPRequest(raw_request, conn)
+
+        self.handle_request(request)
 
         print(f"Handled connection from {addr}")
 
     def get_raw_request(self, conn: socket.socket) -> bytearray:
+        """
+        Reads the entire HTTP request from the socket.
+        """
         HTTP_HEADER_END = b"\r\n\r\n"
         raw_request = bytearray()
 
@@ -23,6 +29,12 @@ class HTTPServer(TCPServer):
             if HTTP_HEADER_END in raw_request:
                 break
         return raw_request
+
+    def handle_request(self, request: HTTPRequest) -> None:
+        """
+        Fulfills the given HTTP request.
+        """
+        pass
 
 
 if __name__ == "__main__":
