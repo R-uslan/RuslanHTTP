@@ -20,7 +20,7 @@ class TCPServer:
         while self.running:
             try:
                 conn, addr = self.s.accept()
-                print(f"Connection from {type(addr)}")
+                print(f"Connection from {addr}")
                 self.handle_connection(conn, addr)
                 conn.close()
             except KeyboardInterrupt:
