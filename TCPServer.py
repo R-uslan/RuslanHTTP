@@ -8,7 +8,7 @@ class TCPServer:
         self.socket: socket.socket = None
         self.buffer_size: int = 4096  # Used for recv
 
-    def start(self):
+    def start(self) -> None:
         """
         Creates a socket, listens on the specified address, and accepts connections.
         """
@@ -27,7 +27,7 @@ class TCPServer:
                 print("Keyboard interrupt detected.")
                 self.stop()
 
-    def stop(self):
+    def stop(self) -> None:
         """
         Gracefully shutdown server.
         """
@@ -36,7 +36,7 @@ class TCPServer:
         if self.socket:
             self.socket.close()
 
-    def handle_connection(self, conn: socket.socket, addr: tuple):
+    def handle_connection(self, conn: socket.socket, addr: tuple) -> None:
         """
         Handle the TCP connection. To be overridden by inheritor.
         """
