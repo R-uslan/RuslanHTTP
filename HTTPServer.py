@@ -17,7 +17,7 @@ class HTTPServer(TCPServer):
     def get_raw_request(self, conn: socket.socket) -> bytearray:
         HTTP_HEADER_END = b"\r\n\r\n"
         raw_request = bytearray()
-        
+
         while chunk := conn.recv(self.buffer_size):
             raw_request.extend(chunk)
             if HTTP_HEADER_END in raw_request:
